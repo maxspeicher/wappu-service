@@ -1,0 +1,16 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="100" height="100" style="overflow: hidden; position: relative;">
+    <desc>Created with Raphaël 2.1.0</desc>
+    <defs>
+        <marker id="raphael-marker-endopen44" markerHeight="4" markerWidth="4" orient="auto" refX="4" refY="2">
+            <path stroke-linecap="round" d="M6,1 1,3.5 6,6" transform="rotate(180 2 2) scale(0.5714285714285714,0.5714285714285714)" stroke-width="1.7500" fill="none" stroke="#000000" />
+        </marker>
+    </defs>
+    <rect x="5" y="5" width="70" height="70" r="5" rx="5" ry="5" fill="none" stroke="#000000" style="" stroke-width="3"/>
+    <path style="" fill="none" stroke="#000000" d="M5,21L75,21" stroke-width="3"/>
+    <path style="" fill="none" stroke="#000000" d="M71,9L63,17M63,9L71,17" stroke-width="3"/>
+    <path style="" fill="none" stroke="#000000" d="M58,17L58,9L50,9L50,17L59.5,17" stroke-width="3"/>
+    <path style="" fill="none" stroke="#000000" d="M45,17L37,17" stroke-width="3"/>
+    <path style="" fill="none" stroke="#000000" d="M40,75C40,75,40,95,40,95C40,95,95,95,95,95C95,95,95,40,95,40C95,40,81.24127197265625,40,75.00684833526611,40" stroke-width="3" marker-end="url(#raphael-marker-endopen44)"/>
+    <circle cx="37" cy="45" r="10" fill="none" stroke="#000000" style="" stroke-width="5"/>
+    <path style="" fill="none" stroke="#000000" d="M53,61L45,53" stroke-width="5"/>
+</svg>

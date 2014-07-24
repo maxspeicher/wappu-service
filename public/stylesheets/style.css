@@ -1,0 +1,218 @@
+/**
+ * General
+ */
+
+body {
+    background-image: url(../images/bg2.jpg);
+    background-attachment: fixed;
+    color: #eee;
+    font: 11pt "Crete Round", serif;
+    margin: 0px;
+    padding: 0px;
+}
+
+a {
+    color: #00B7FF;
+}
+
+div, li, p {
+    line-height: 167%;
+}
+
+q:lang(en) {
+    font: inherit;
+    quotes: "“" "”" "‘" "’";
+}
+
+q:before {
+    content: open-quote;
+}
+
+q:after {
+    content: close-quote;
+}
+
+textarea {
+    width: 100%;
+    height: 200px;
+}
+
+tt {
+    font-family: "Lucida Sans Typewriter", "Lucida Console", Monaco, "Bitstream Vera Sans Mono", monospace;
+}
+
+.border-bottom {
+    border-bottom: 1px #eee solid;
+}
+
+.border-right {
+    border-right: 1px #eee solid;
+}
+
+.c {
+    clear: both;
+}
+
+.center {
+    text-align: center;
+}
+
+.fl {
+    float: left;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.hidden {
+    display: none;
+}
+
+.right {
+    text-align: right;
+}
+
+.transparent {
+    zoom: 1;
+    filter: alpha(opacity=50);
+    opacity: 0.5;
+}
+
+/**
+ * Home Page
+ */
+
+div#floating-logo {
+    position: fixed;
+    right: 0px;
+    top: 0px;
+    transform: scale(0.5,0.5);
+    -ms-transform: scale(0.5,0.5); /* IE 9 */
+    -webkit-transform: scale(0.5,0.5); /* Safari and Chrome */
+    -o-transform: scale(0.5,0.5); /* Opera */
+    -moz-transform: scale(0.5,0.5); /* Firefox */
+}
+ 
+div#logos {
+    margin: 0px auto;
+    max-width: 650px;
+    padding: 10px;
+}
+
+div#logos img {
+    margin: 10px;
+}
+
+div#main {
+    margin: 50px auto 0px;
+    padding: 10px;
+}
+
+div#title {
+    margin: 50px auto 0px;
+}
+
+div.block {
+    margin-bottom: 75px;
+}
+
+div.container { /* Bootstrap component */
+    background-color: #373737;
+    border-bottom: 1px #2e2e2e solid;
+    border-left: 1px #2e2e2e solid;
+    border-right: 1px #2e2e2e solid;
+    max-width: 600px;
+    padding: 0px 20px;
+}
+
+div.important {
+    font-size: 150%;
+}
+
+div.p, ul {
+    margin-bottom: 25px;
+}
+
+div.wide-container {
+    background-color: #373737;
+    border-bottom: 1px #2e2e2e solid;
+    border-left: 1px #2e2e2e solid;
+    margin-left: 200px;
+    padding: 20px;
+}
+
+h1 {
+    font: 24pt Lobster, cursive;
+    text-align: center;
+}
+
+h2 {
+    font: 20pt Lobster, cursive;
+    text-align: center;
+}
+
+h3 {
+    font: 16pt Lobster, cursive;
+    text-align: left;
+}
+
+h4 {
+    display: inline;
+    font: 11pt "Crete Round", serif;
+    font-weight: bold;
+    text-align: left;
+}
+
+h4:after {
+    content: ". ";
+    font-weight: bold;
+}
+
+img.file {
+    vertical-align: middle;
+}
+
+input#login {
+    background-color: transparent;
+    border: 1px #eee solid;
+    border-radius: 3px;
+    box-shadow: 0 0 15px #eee;
+    font-size: 24pt;
+}
+
+span.sio-logo {
+    width: 100px;
+    height: 100px;
+}
+
+/**
+ * WaPPU A/B Testing Service
+ */
+
+a.add-custom-rule {
+    margin-left: 20px;
+}
+
+div#custom-rule-template {
+    display: none;
+}
+
+input[name="choose-config"] {
+    margin: 10px;
+    vertical-align: middle;
+}
+
+input.custom-component {
+    background-color: #eee;
+    margin-right: 20px;
+    width: 150px;
+}
+
+span.stdev {
+    color: #bbb;
+}
+
+td {
+    vertical-align: middle;
+}

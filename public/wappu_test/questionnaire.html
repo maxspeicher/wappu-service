@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+<title>Online survey about webpage usability | powered by WaPPU</title>
+
+<link rel="stylesheet" type="text/css" href="jquery-ui/css/dark/jquery-ui-1.10.1.min.css" />
+<link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<link rel="stylesheet" type="text/css" href="css/questionnaire.css" />
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="jquery-ui/js/jquery-ui-1.10.1.min.js"></script>
+<script src="js/wappu-tracking.min.js"></script>
+
+</head>
+
+<body>
+
+<div id="instructions" class="ui-widget ui-widget-content ui-corner-all">
+    <strong>Please do not close this window!</strong><br /><br />
+    Thank you very much! The online survey starts in this window as soon as you leave the webpage.<br /><br />
+    Your browser settings might prevent this window from popping up automatically. <em>So please remember to open
+    this window again after leaving the webpage.</em>
+</div>
+
+<div id="questionnaire-container" class="ui-widget ui-widget-content ui-corner-all">
+    <form id="questionnaire" method="POST" action="#"></form>
+    * <small><a href="http://en.wikipedia.org/wiki/Typography" target="_blank">Definition of typography</a></small>
+</div>
+
+<script>
+var WaPPU = {
+    data: {
+        interactions: {},
+        inuit: {}
+    }
+};
+
+(function($) {
+
+    var saveData = function(callback) {
+        $.WaPPUUtils.postData({
+            projectId: WaPPU.options.projectId,
+            userId: WaPPU.options.userId || '-1',
+            sessionId: WaPPU.sessionId,
+            serpUrl: window.opener.location.href,
+            context: $.WaPPUUtils.stringify(WaPPU.options.context),
+            interfaceVersion: WaPPU.options.interfaceVersion,
+            features: $.WaPPUUtils.stringify(WaPPU.data.interactions),
+            usabilityItems: $.WaPPUUtils.stringify(WaPPU.data.inuit)
+        }, callback);
+    };
+
+    // shortcut for accessing the {I}nuit usability items
+    var _i = WaPPU.data.inuit;
+
+    WaPPU.options = window.opener.WaPPU.options;
+    WaPPU.sessionId = $.WaPPUUtils.ts();
+
+    var items = [
+        { label: 'informativeness',     description: 'I found the content I was looking for.', invert: false },
+        { label: 'understandability',   description: 'I could easily understand the provided content.', invert: false },
+        { label: 'confusion',           description: 'I was confused while using the webpage.', invert: true },
+        { label: 'distraction',         description: 'I was distracted by elements of the webpage.', invert: true },
+        { label: 'readability',         description: 'Typography* and layout added to readability.', invert: false },
+        { label: 'infDensity',          description: 'There was too much information presented on too little space.', invert: true },
+        { label: 'accessibility',       description: 'My desired content was easily reachable.', invert: false }
+    ];
+
+    var $q = $('#questionnaire');
+
+    $.each(items, function(i,v) {
+        $q.append(
+            v.description +
+            '<div class="likert-scale center">' +
+                'Don\'t agree' +
+                '<div class="buttonset">' +
+                    '<label for="' + v.label + '_n"><i class="icon-' + (v.invert ? 'smile' : 'frown') + '"></i></label>' +
+                    '<input type="radio" name="' + v.label + '" id="' + v.label + '_n" value="' + (v.invert ? '1' : '-1') + '" />' +
+                    '<label for="' + v.label + '_0"><i class="icon-meh"></i></label>' +
+                    '<input type="radio" name="' + v.label + '" id="' + v.label + '_0" value="0" />' +
+                    '<label for="' + v.label + '_y"><i class="icon-' + (v.invert ? 'frown' : 'smile') + '"></i></label>' +
+                    '<input type="radio" name="' + v.label + '" id="' + v.label + '_y" value="' + (v.invert ? '-1' : '1') + '" />' +
+                '</div>' +
+                'Agree' +
+            '</div>'
+        );
+    });
+
+    $q.append('<div class="right"><input type="button" value="Fertig" /></div>');
+
+    $('i').addClass('icon-2x');
+    $('.buttonset').buttonset();
+    $('.buttonset :radio').change(function() {
+        var $this = $(this);
+
+        _i[$this.attr('name')] = parseInt($this.val());
+    });
+
+    $('input[type="button"]').button().click(function(e) {
+        if ($q.find(':checked').length < 7) {
+            alert('Please rate all 7 statements. Thank you!');
+        } else {
+            saveData(function() {
+                self.close();
+            });
+        }
+    });
+
+    var blinkTimer;
+    var docTitle = 'Online survey about webpage usability | powered by WaPPU';
+    var msg = 'Please answer';
+
+    $(opener).unload(function() {
+        blinkTimer = window.setInterval(function() {
+            document.title = document.title === docTitle ? msg : docTitle;
+        }, 1000);
+
+        // Chrome
+        self.blur();
+        window.setTimeout(self.focus, 0);
+
+        // not Chrome
+        self.focus();
+
+        // helps in Chrome if window focus is disabled by user settings
+        alert('Please rate the usability of the webpage you just left.');
+    });
+
+    $(document).mousemove(function() {
+        if (blinkTimer) {
+            window.clearInterval(blinkTimer);
+            document.title = docTitle;
+        }
+    });
+
+    $(window).blur(function() {
+        $('#instructions').hide();
+        $('#questionnaire-container').show();
+    });
+
+})(jQuery);
+</script>
+
+</body>
+
+</html>

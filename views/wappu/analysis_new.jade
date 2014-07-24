@@ -1,0 +1,39 @@
+extends ../layout-wide
+
+block content
+  div.block
+    table(border=0, cellpadding=10, cellspacing=0)
+      tr
+        td
+        each v in interfaces
+          td(colspan=2)
+            h3.center Interface <q>#{v}</q>
+        td.center(rowspan=10)
+          div#traffic-light
+          div#significance.inline-block
+      tr
+        td.border-bottom
+        each v in interfaces
+          td.center.border-bottom(colspan=2)
+            | Based on <span id="users#{v}"><i class="icon-spinner icon-spin"></i></span> users.
+      tr
+        td.border-right <strong>Overall Usability</strong>
+        each v in interfaces
+          td.center
+            .important(id='usability#{v}-value') <i class="icon-spinner icon-spin"></i>
+          - if (v == 'A')
+            td.border-right(id='usability#{v}-bar')
+          - else
+            td(id='usability#{v}-bar')
+      each v, k in usabilityItems
+        tr
+          td.border-right #{v}
+          each i in interfaces
+            td.center(id='#{k}#{i}-value') <i class="icon-spinner icon-spin"></i>
+            - if (i == 'A')
+              td.border-right(id='#{k}#{i}-bar')
+            - else
+              td(id='#{k}#{i}-bar')
+  script
+    var projectId = #{projectId};
+  script(src='/javascripts/wappu-analysis.js')
