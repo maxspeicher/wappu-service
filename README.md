@@ -16,7 +16,7 @@ DISCLAIMER: This is a research prototype that is working but still highly experi
 7. Change host and port of the statistics-utils software in [globals.js](globals.js) if different from `localhost:8082`.
 8. Run wappu-service using `node app`. It now runs under `http://localhost:3000`.
 9. A first demo project is automatically installed. The dummy interfaces are deployed under `http://localhost:3000/wappu_test/indexA.html` and `indexB.html`. The corresponding analysis can be found at `http://localhost:3000/wappu/analysis?projectId=0`. The demo features a very simply set-up by only considering the relative amount of clicks inside the grey box for predicting usability. It is presented in the demo video below.
-10. If you deploy WaPPU with a path different from `localhost:3000` you have to change this path in [public/wappu_test/js/wappu-tracking.min.js](public/wappu_test/js/wappu-tracking.min.js) and [wappu-service/wappu-frontend-dependencies/js/wappu-tracking.min.js](wappu-service/wappu-frontend-dependencies/js/wappu-tracking.min.js).
+10. If you deploy WaPPU with a path different from `localhost:3000` you have to change this path in [public/wappu_test/js/wappu-tracking.min.js](public/wappu_test/js/wappu-tracking.min.js) and [wappu-frontend-dependencies/js/wappu-tracking.min.js](wappu-frontend-dependencies/js/wappu-tracking.min.js).
 
 ## Set up an A/B Test
 
