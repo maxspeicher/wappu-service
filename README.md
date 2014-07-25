@@ -5,9 +5,9 @@ WaPPU is a tool for usability-based A/B testing that enables prediction of usabi
 
 DISCLAIMER: This is a research prototype that is working but still highly experimental. It is not (yet) intended for productive use.
 
-## Get Started
+## Getting Started
 
-1. Set up a MySQL database called *wappu* and create tables using the scripts provided under *wappu-db-scripts*.
+1. Set up a MySQL database called *wappu* and create tables using the scripts provided under *wappu-service/wappu-db-scripts*.
 2. Clone my [statistics-utils](https://github.com/maxspeicher/statistics-utils "statistics-utils") repository.
 3. Enter your database credentials in *statistics-utils/src/main/resources/application.properties*.
 4. Deploy the statistics-utils software using `mvn package tomcat:run -Dmaven.tomcat.port=8082`. It now runs under `http://localhost:8082`.
@@ -15,10 +15,22 @@ DISCLAIMER: This is a research prototype that is working but still highly experi
 6. Enter your database credentials in the second credentials block in *wappu-service/db.js*.
 7. Change host and port of the statistics-utils software in *wappu-service/globals.js* if different from `localhost:8082`.
 8. Run wappu-service using `node app`. It now runs under `http://localhost:3000`.
-9. The frontend for creating A/B testing projects and obtaining the code snippets to be inserted into the interfaces-under-test can be found at `http://localhost:3000/wappu`.
-10. The real-time analysis of an A/B test can be accessed via `http://localhost:3000/wappu/analysis?projectId=[...]`. The project ID is contained in the code snippets pasted into the involved interfaces.
-11. A first demo project is automatically installed. The interfaces are deployed under `http://localhost:3000/wappu_test/indexA.html` and `indexB.html`. The corresponding analysis can be found at `http://localhost:3000/wappu/analysis?projectId=0`. The demo features a very simply set-up by only considering the relative amount of clicks inside the grey box for predicting usability.
-12. If you deploy WaPPU with a path different from `localhost:3000` you have to change this path in *wappu-service/public/wappu_test/js/wappu-tracking.min.js*.
+9. A first demo project is automatically installed. The dummy interfaces are deployed under `http://localhost:3000/wappu_test/indexA.html` and `indexB.html`. The corresponding analysis can be found at `http://localhost:3000/wappu/analysis?projectId=0`. The demo features a very simply set-up by only considering the relative amount of clicks inside the grey box for predicting usability. It is presented in the demo video below.
+10. If you deploy WaPPU with a path different from `localhost:3000` you have to change this path in *wappu-service/public/wappu_test/js/wappu-tracking.min.js* and *wappu-service/wappu-frontend-dependencies/js/wappu-tracking.min.js*.
+
+## Set up an A/B Test
+
+1. The frontend for creating A/B testing projects and obtaining the code snippets to be inserted into the interfaces-under-test can be found at `http://localhost:3000/wappu`.
+2. Enter a name and optional password (not yet used by the service) and click "Save Project".
+3. Choose "Create a custom configuration" and define for which components of your interfaces you want to track which interaction features. The components should be defined as ID selectors (e.g., `#content`) and must be contained in both interfaces! The features (e.g., *clicks*) are suggested via autocompletion as soon as you start typing.
+4. Paste the generated code snippets right before the `</body>` tags of the two different versions of your interface.
+5. The contents of *wappu-service/wappu-frontend-dependencies* have to be available under the same path as your interfaces-under-test.
+6. The real-time analysis of your A/B test can be accessed via `http://localhost:3000/wappu/analysis?projectId=[...]`. The project ID is contained in the code snippets pasted into the involved interfaces.
+7. We strongly recommend watching the demo video below to get a better understanding of WaPPU's functionalities and principles.
+
+## Limitations
+
+If you track more than one feature for a component in a demo set-up of wappu-service, you will get highly inaccurate predictions. This is because the classifier used improves in prediction quality only with growing amounts of data. However, WaPPU has not yet been tested in a real-world scenario with massive amounts of data.
 
 ## Demo Video
 
