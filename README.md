@@ -24,7 +24,7 @@ DISCLAIMER: This is a research prototype that is working but still highly experi
 2. Enter a name and optional password (not yet used by the service) and click "Save Project".
 3. Choose "Create a custom configuration" and define for which components of your interfaces you want to track which interaction features. The components should be defined as ID selectors (e.g., `#content`) and must be contained in both interfaces! The features (e.g., *clicks*) are suggested via autocompletion as soon as you start typing.
 4. Paste the generated code snippets right before the `</body>` tags of the two different versions of your interface.
-5. The contents of [wappu-service/wappu-frontend-dependencies](wappu-service/wappu-frontend-dependencies) have to be available under the same path as your interfaces-under-test.
+5. The contents of [wappu-frontend-dependencies](wappu-frontend-dependencies) have to be available under the same path as your interfaces-under-test.
 6. The real-time analysis of your A/B test can be accessed via `http://localhost:3000/wappu/analysis?projectId=[...]`. The project ID is contained in the code snippets pasted into the involved interfaces.
 7. We strongly recommend watching the demo video below to get a better understanding of WaPPU's functionalities and principles.
 
