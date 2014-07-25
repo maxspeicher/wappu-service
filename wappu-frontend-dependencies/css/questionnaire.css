@@ -1,0 +1,29 @@
+/***** USABILITY QUESTIONNAIRE *****/
+
+#questionnaire-container {
+    font-family: Verdana, Arial, sans-serif;
+    padding: 20px;
+    display: none;
+}
+
+#questionnaire-container label {
+    cursor: pointer;
+}
+
+.buttonset {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.center {
+    text-align: center;
+}
+
+.likert-scale {
+    font-size: small;
+    margin: 20px 0 40px 0;
+}
+
+.no-close .ui-dialog-titlebar-close {
+    display: none;
+}
