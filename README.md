@@ -5,6 +5,12 @@ WaPPU is a tool for usability-based A/B testing that enables prediction of usabi
 
 DISCLAIMER: This is a research prototype that is working but still highly experimental. It is not (yet) intended for productive use.
 
+If you make use of WaPPU, please include the following copyright statement:
+*The WaPPU Service -- https://github.com/maxspeicher/wappu-service/ -- DOI: http://dx.doi.org/10.5281/zenodo.11049
+Copyright (C) 2013-2014  Maximilian Speicher*
+
+If you want to cite WaPPU, please refer to the following research paper: [Ensuring Web Interface Quality through Usability-based Split Testing](http://link.springer.com/chapter/10.1007/978-3-319-08245-5_6)
+
 ## Getting Started
 
 1. Set up a MySQL database called *wappu* and create tables using the scripts provided under [wappu-db-scripts](wappu-db-scripts).
