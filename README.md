@@ -5,18 +5,24 @@ WaPPU is a tool for usability-based A/B testing that enables prediction of usabi
 
 DISCLAIMER: This is a research prototype that is working but still highly experimental. It is not (yet) intended for productive use.
 
+If you make use of WaPPU, please include the following copyright statement:
+*The WaPPU Service -- https://github.com/maxspeicher/wappu-service/ -- DOI: http://dx.doi.org/10.5281/zenodo.11049
+Copyright (C) 2013-2014  Maximilian Speicher*
+
+If you want to cite WaPPU, please refer to the following research paper: [Ensuring Web Interface Quality through Usability-based Split Testing](http://link.springer.com/chapter/10.1007/978-3-319-08245-5_6)
+
 ## Getting Started
 
-1. Set up a MySQL database called *wappu* and create tables using the scripts provided under *wappu-service/wappu-db-scripts*.
-2. Clone my [statistics-utils](https://github.com/maxspeicher/statistics-utils "statistics-utils") repository.
-3. Enter your database credentials in *statistics-utils/src/main/resources/application.properties*.
+1. Set up a MySQL database called *wappu* and create tables using the scripts provided under [wappu-db-scripts](wappu-db-scripts).
+2. Clone my [statistics-utils](https://github.com/maxspeicher/statistics-utils) [![DOI](https://zenodo.org/badge/5253/maxspeicher/statistics-utils.png)](http://dx.doi.org/10.5281/zenodo.11048) repository.
+3. Enter your database credentials in [statistics-utils/src/main/resources/application.properties](https://github.com/maxspeicher/statistics-utils/blob/master/src/main/resources/application.properties).
 4. Deploy the statistics-utils software using `mvn package tomcat:run -Dmaven.tomcat.port=8082`. It now runs under `http://localhost:8082`.
 5. Clone this repository.
-6. Enter your database credentials in the second credentials block in *wappu-service/db.js*.
-7. Change host and port of the statistics-utils software in *wappu-service/globals.js* if different from `localhost:8082`.
+6. Enter your database credentials in the second credentials block in [db.js](db.js).
+7. Change host and port of the statistics-utils software in [globals.js](globals.js) if different from `localhost:8082`.
 8. Run wappu-service using `node app`. It now runs under `http://localhost:3000`.
 9. A first demo project is automatically installed. The dummy interfaces are deployed under `http://localhost:3000/wappu_test/indexA.html` and `indexB.html`. The corresponding analysis can be found at `http://localhost:3000/wappu/analysis?projectId=0`. The demo features a very simply set-up by only considering the relative amount of clicks inside the grey box for predicting usability. It is presented in the demo video below.
-10. If you deploy WaPPU with a path different from `localhost:3000` you have to change this path in *wappu-service/public/wappu_test/js/wappu-tracking.min.js* and *wappu-service/wappu-frontend-dependencies/js/wappu-tracking.min.js*.
+10. If you deploy WaPPU with a path different from `localhost:3000` you have to change this path in [public/wappu_test/js/wappu-tracking.min.js](public/wappu_test/js/wappu-tracking.min.js) and [wappu-frontend-dependencies/js/wappu-tracking.min.js](wappu-frontend-dependencies/js/wappu-tracking.min.js).
 
 ## Set up an A/B Test
 
@@ -24,7 +30,7 @@ DISCLAIMER: This is a research prototype that is working but still highly experi
 2. Enter a name and optional password (not yet used by the service) and click "Save Project".
 3. Choose "Create a custom configuration" and define for which components of your interfaces you want to track which interaction features. The components should be defined as ID selectors (e.g., `#content`) and must be contained in both interfaces! The features (e.g., *clicks*) are suggested via autocompletion as soon as you start typing.
 4. Paste the generated code snippets right before the `</body>` tags of the two different versions of your interface.
-5. The contents of *wappu-service/wappu-frontend-dependencies* have to be available under the same path as your interfaces-under-test.
+5. The contents of [wappu-frontend-dependencies](wappu-frontend-dependencies) have to be available under the same path as your interfaces-under-test.
 6. The real-time analysis of your A/B test can be accessed via `http://localhost:3000/wappu/analysis?projectId=[...]`. The project ID is contained in the code snippets pasted into the involved interfaces.
 7. We strongly recommend watching the demo video below to get a better understanding of WaPPU's functionalities and principles.
 
