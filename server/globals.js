@@ -30,7 +30,7 @@
       distraction: "Distraction",
       readability: "Readability",
       infDensity: "Information Density",
-      accessibility: "Accessibility"
+      reachability: "Reachability"
     },
     WAPPU_CLASSIFIER: "moa.classifiers.bayes.NaiveBayes" //"moa.classifiers.trees.HoeffdingTree"
   };

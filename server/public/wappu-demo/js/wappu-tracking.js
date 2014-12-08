@@ -610,9 +610,11 @@ var WaPPU = {
             }
         }
 
-        for (var i=0; i<pageFeatures.length; ++i) {
-            if (!trainingData[pageFeatures[i]]) {
-                trainingData[pageFeatures[i]] = _i[pageFeatures[i]];
+        if (pageFeatures) {
+            for (var i=0; i<pageFeatures.length; ++i) {
+                if (!trainingData[pageFeatures[i]]) {
+                    trainingData[pageFeatures[i]] = _i[pageFeatures[i]];
+                }
             }
         }
 
@@ -646,7 +648,7 @@ var WaPPU = {
     WaPPU.start = function(options, components, pageFeatures) {
         WaPPU.options = options;
 
-        if (WaPPU.options.useDefaultContext && WaPPU.options.useDefaultContext === false) {
+        if (WaPPU.options.useDefaultContext === false) {
             WaPPU.options.context = {};
         } else {
             var isBlockingAds = (document.getElementById('wappu-advertisement') === null);
