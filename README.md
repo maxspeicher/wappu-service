@@ -1,7 +1,7 @@
 WaPPU: Was that Page Pleasant to Use?
 =====================================
 
-WaPPU is a tool for usability-based A/B testing that enables prediction of usability from user interactions. A WaPPU A/B test involves two webpages that are compared based on a usability score derived from a questionnaire. For instance, **webpage A has a usability of 99 while webpage B has a usability of only 42.** The default configuration is to show the questionnaire before a user leaves the first webpage. The usability score of the second webpage is then predicted based on user interactions alone. This is done by a usability model that is trained from users' answers to the questionnaire on webpage one.
+WaPPU is a tool for usability-based A/B testing that enables the prediction of usability scores from user interactions, e.g., **webpage A has a usability of 99 while webpage B has a usability of only 42.** The default configuration is to show a minimal questionnaire before a user leaves the first webpage. The usability score of the second webpage is then predicted based on user interactions alone. This is done by usability models that are trained from users' answers to the questionnaire on webpage one.
 
 If you make use of WaPPU, please include the following copyright statement:
 *The WaPPU Service -- https://github.com/maxspeicher/wappu-service/ -- DOI: http://dx.doi.org/10.5281/zenodo.11049
@@ -14,7 +14,7 @@ If you want to cite WaPPU, please refer to the following research paper: [Ensuri
 1. Set up a MySQL database called *wappu* and create tables using the scripts provided under [db-scripts](db-scripts).
 2. Clone my [statistics-utils](https://github.com/maxspeicher/statistics-utils) [![DOI](https://zenodo.org/badge/5253/maxspeicher/statistics-utils.png)](http://dx.doi.org/10.5281/zenodo.11048) repository.
 3. Enter your database credentials in [statistics-utils/src/main/resources/application.properties](https://github.com/maxspeicher/statistics-utils/blob/master/src/main/resources/application.properties).
-4. Deploy the statistics-utils software using `mvn package tomcat:run -Dmaven.tomcat.port=8082`. It now runs under `http://localhost:8082`.
+4. Deploy the statistics-utils software using `mvn package tomcat:run -Dmaven.tomcat.port=8082`. It now runs under `http://localhost:8082/statistics-utils`.
 5. Clone this repository.
 6. Enter your database credentials in the second credentials block in [server/db.js](server/db.js).
 7. Change host and port of the statistics-utils software in [server/globals.js](server/globals.js) if different from `localhost:8082`.
@@ -24,7 +24,7 @@ If you want to cite WaPPU, please refer to the following research paper: [Ensuri
 
 ## Set up the Client!
 
-First, set up the two webpages you want to compare using WaPPU. Then, include the JavaScripts contained in [client](client) right before `</body>` on both webpages. Finally, initialize WaPPU using the function
+First, set up the two webpages you want to compare using a WaPPU-based A/B test. Then, include the JavaScripts contained in [client](client) right before `</body>` on both webpages. Finally, initialize WaPPU using the function
 
 `WaPPU.start(options, components, pageFeatures)`:
 
@@ -32,10 +32,10 @@ First, set up the two webpages you want to compare using WaPPU. Then, include th
   * **interfaceVersion** (required): A or B.
   * **projectId** (required): A unique ID in integer format that you do not use for any other WaPPU A/B test.
   * **userId** (optional, default `-1`): A user ID in integer format, in case you want to track users across sessions.
-  * **provideQuestionnaire** (optional, default `false`): Indicates whether the webpage presents an [INUIT](https://github.com/maxspeicher/inuit-resources) questionnaire to the user. *At least one of the webpages-under-test must present the questionnaire!*
-  * **useDefaultContext** (optional, default `true`): WaPPU is a context-aware tool, since different user contexts trigger different interaction feature values. Therefore, WaPPU provides separate usability scores and learns separate models for different contexts. The default context considers the presence of an ad blocker and the screen size, e.g., `{"adBlock":true,"screenCtx":"HD"}`. Set this to `false` if you do not want to make use of these default context dimensions. If so, you do not need to include `advertisement.js` on the client.
+  * **provideQuestionnaire** (optional, default `false`): Indicates whether the webpage presents an [INUIT](https://github.com/maxspeicher/inuit-resources) questionnaire to the user. *At least one of the webpages-under-test must present the questionnaire!* More details are given below.
+  * **useDefaultContext** (optional, default `true`): WaPPU is a context-aware tool, since different user contexts trigger different interaction feature values. Therefore, WaPPU provides separate usability scores and learns separate models for different contexts. The default context considers the presence of an ad blocker and the screen size, e.g., `{"adBlock":true,"screenCtx":"HD"}`. Set this option to `false` if you do not want to make use of these default context dimensions. If so, you do not need to include `advertisement.js` on the client.
   * **additionalContext** (optional, default `{}`): Add your own context dimensions in terms of a JSON object, e.g., `{"loggedIn": true, "browser": "IE9"}`.
-  * **useRelativeFeatures** (optional, default `true`): For each absolute feature that is tracked (e.g., clicks on navigation bar), WaPPU calculates an additional relative feature w.r.t. the whole webpage (e.g., clicks on navigation bar divided by total clicks on page). Set this to `false` if you need more precise predictions for small amounts of interaction data.
+  * **useRelativeFeatures** (optional, default `true`): For each absolute feature that is tracked (e.g., clicks on navigation bar), WaPPU calculates an additional relative feature w.r.t. the whole webpage (e.g., clicks on navigation bar divided by total clicks on page). Set this option to `false` if you need more precise predictions for small amounts of interaction data.
 * **components** (required): A JSON object specifying which interaction features shall be tracked on which components of the webpage. The keys of the components object are jQuery selectors identifying the different components (e.g., `#navigation`); the values are arrays listing the features to be tracked for each component. The following features are available:
   * `arrivalTime`: amount of time between page load and first hover
   * `charsDeleted`: number of characters deleted in input fields
@@ -68,7 +68,9 @@ First, set up the two webpages you want to compare using WaPPU. Then, include th
 
 Please be aware that *all* of the above options except **interfaceVersion** and **provideQuestionnaire** must be identical in *both* webpages-under-test!
 
-In case you set `provideQuestionnaire` to `false`, interaction data is automatically sent to the WaPPU server at a predefined interval. However, in at least one of the webpages-under-test, the option must be set to `true`. In this case, the automatic interaction data transfer is disabled. Rather, it is required that the user is provided with an [INUIT](https://github.com/maxspeicher/inuit-resources) questionnaire before leaving the page. The answers to this questionnaire must be collected in a JSON object of the form
+### The `provideQuestionnaire` Option
+
+In case you set `provideQuestionnaire` to `false`, all interaction data is automatically sent to the WaPPU server at a predefined interval. However, in at least one of the webpages-under-test, the option must be set to `true`. In this case, the automatic data transfer is disabled. Rather, it is required that the user is provided with an [INUIT](https://github.com/maxspeicher/inuit-resources) questionnaire before leaving the page. The answers to this *yes/no* questionnaire must be collected in a JSON object of the form:
 
 ```javascript
 {
@@ -82,23 +84,27 @@ In case you set `provideQuestionnaire` to `false`, interaction data is automatic
 }
 ```
 
-The values of the individual items can be either `1` (positive answer) or `0` (negative answer). The object is then passed to the function `WaPPU.save(args)`:
+The values of the individual items can be either `1` (positive answer) or `0` (negative answer). The object is then passed to the function `WaPPU.save(args)`, which sends it to the WaPPU server along with the collected interaction data:
 
 * **args** is a JSON object containing the following parameters:
+  * **usabilityItems** (required): The obove JSON object containing the answers to the INUIT questionnaire.
   * **callback** (optional): A function to be called after the data has been sent.
-  * **usabilityItems**: The obove JSON object containing the answers to the INUIT questionnaire.
 
-WaPPU does not provide a function for automaticlly displaying the questionnaire, as its layout and specific implementation highly depend on the webpages to be tested. However, for inspiration, please have a look at the sample project under [server/public/wappu-demo](server/public/wappu-demo).
+WaPPU does not provide a function for automaticlly displaying the [INUIT](https://github.com/maxspeicher/inuit-resources) questionnaire, as its layout and specific implementation highly depend on the webpages to be tested. However, for inspiration, please have a look at the sample project under [server/public/wappu-demo](server/public/wappu-demo).
+
+### Stopping & Resuming Interaction Tracking
 
 If you need to pause and resume WaPPU's tracking functionalities (e.g., because you are assessing asynchronous webpages), please use the functions `WaPPU.stop()` and `WaPPU.resume()`.
 
-WaPPU currently supports two incremental classifiers for learning its usability models: the Naive Bayes classifier and the Hoeffding tree. Which one to use can be configured in [server/globals.js](server/globals.js) (parameter `WAPPU_CLASSIFIER`, value `moa.classifiers.bayes.NaiveBayes` or `moa.classifiers.trees.HoeffdingTree`). These classification algorithms are powered by [MOA](http://moa.cms.waikato.ac.nz/).
+### Classification
+
+WaPPU currently supports two incremental classifiers for learning its usability models: the *Naive Bayes* classifier and the *Hoeffding tree*. Which one to use can be configured in [server/globals.js](server/globals.js) (parameter `WAPPU_CLASSIFIER`, value `moa.classifiers.bayes.NaiveBayes` or `moa.classifiers.trees.HoeffdingTree`). These classification algorithms are powered by [MOA](http://moa.cms.waikato.ac.nz/).
 
 ## Get your Usability Scores! 
 
-Once you have set up your server and WaPPU-powered A/B test, you can access the real-time analysis at `<endpoint of server>/wappu?projectId=X`, with `X` being your unique project ID. First, WaPPU shows all registered contexts along with the corresponding number of users<sup>1</sup>. By clicking a context, you are provided with the detailed comparison of your webpages' usability (in terms of the seven INUIT items and an overall usability score). Moreover, a traffic light automatically indicates whether the difference between your webpages is statistically significant based on a Mann-Whitney U test.
+Once you have set up your server and WaPPU-powered A/B test, you can access the real-time analysis at `<endpoint of server>/wappu?projectId=X`, with `X` being your unique project ID. First, WaPPU shows all registered contexts along with the corresponding numbers of users<sup>1</sup>. By clicking a context, you are provided with the detailed comparison of your webpages' usability (in terms of the seven INUIT items and an overall usability score). Moreover, a traffic light automatically indicates whether the difference between your webpages is statistically significant based on a *Mann-Whitney U test.*
 
-<sup>1</sup> This number is an upper bound, as it is possible that certain instances cannot be classified by WaPPU's models and the number of users is thus smaller on the actual analysis page.
+<sup>1</sup> These numbers are upper bounds, as it is possible that certain instances cannot be classified by WaPPU's models and the number of users is thus smaller on the actual analysis page.
 
 ## Limitations
 
