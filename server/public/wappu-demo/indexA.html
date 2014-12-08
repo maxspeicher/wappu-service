@@ -42,14 +42,45 @@
 <script src="js/wappu-utils.js"></script>
 <script src="js/wappu-tracking.js"></script>
 <script>
-    WaPPU.start({
-        interfaceVersion: "A",
-        projectId: 0,
-        useDefaultContext: true,
-        useRelativeFeatures: false
-    },{
-        "#serpResults":["clicks"]
-    }, []);
+    $('body').append(
+        '<div id="dialog-confirmation" title="Online Survey">' +
+            'We are currently conducting an online survey to improve the usability of our websites. ' +
+            'With your participation, we can ensure a high quality of the services we offer.<br /><br />' +
+            'Do you want to participate?' +
+        '</div>'
+    );
+
+    var $dc = $('#dialog-confirmation');
+
+    $dc.dialog({
+        autoOpen: true,
+        modal: false,
+        width: 600,
+        buttons: {
+            Yes: function(e) {
+                e.stopPropagation();
+                
+                WaPPU.start({
+                    interfaceVersion: "A",
+                    projectId: 0,
+                    provideQuestionnaire: true,
+                    useDefaultContext: true,
+                    useRelativeFeatures: false
+                },{
+                    "#serpResults":["clicks"]
+                }, []);
+
+                var questionnaire = window.open('questionnaire.html', 'questionnaire_' + location.href,
+                    'height=600, left=' + (screen.width/2 - 300) + ', menubar=no, modal=yes, toolbar=no, top=' +
+                    (screen.height/2 - 300) + ', width=600');
+
+                $(this).dialog('close');
+            },
+            No: function() {
+                $(this).dialog('close');
+            }
+        }
+    });
 </script>
 
 </body>
