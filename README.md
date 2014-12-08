@@ -12,7 +12,7 @@ If you want to cite WaPPU, please refer to the following research paper: [Ensuri
 ## Set up your WaPPU Server!
 
 1. Set up a MySQL database called *wappu* and create tables using the scripts provided under [db-scripts](db-scripts).
-2. Clone my [statistics-utils](https://github.com/maxspeicher/statistics-utils) [![DOI](https://zenodo.org/badge/5253/maxspeicher/statistics-utils.png)](http://dx.doi.org/10.5281/zenodo.11048) repository.
+2. Clone my [statistics-utils](https://github.com/maxspeicher/statistics-utils) [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.13162.svg)](http://dx.doi.org/10.5281/zenodo.13162) repository.
 3. Enter your database credentials in [statistics-utils/src/main/resources/application.properties](https://github.com/maxspeicher/statistics-utils/blob/master/src/main/resources/application.properties).
 4. Deploy the statistics-utils software using `mvn package tomcat:run -Dmaven.tomcat.port=8082`. It now runs under `http://localhost:8082/statistics-utils`.
 5. Clone this repository.
