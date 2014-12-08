@@ -1,0 +1,45 @@
+doctype 5
+html(lang='en')
+  head
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title= title
+    link(href='//fonts.googleapis.com/css?family=Lobster', rel='stylesheet', type='text/css')
+    link(href='//fonts.googleapis.com/css?family=Crete+Round:400,400italic', rel='stylesheet', type='text/css')
+    link(rel='stylesheet', href='/bootstrap/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/jquery-ui/css/dark/jquery-ui-1.10.1.min.css')
+    link(rel='stylesheet', href='//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='shortcut icon', href='//www.bluekiwi.de/favicon.ico', type='image/x-icon')
+    script(src='/javascripts/raphael-min.js')
+    script(src='/javascripts/jquery-1.8.3.min.js')
+    script(src='/jquery-ui/js/jquery-ui-1.10.1.min.js')
+    script(src='/javascripts/sio.js')
+  body
+    div.container
+      div#title
+        div.center
+          span.sio-logo
+        h1 Search Interaction Optimization
+        h2 A Design Thinking Approach
+        div.center by Maximilian Speicher, MSc ETH
+      script(src='/javascripts/logo.js')
+      div#main
+        block content
+    div#logos.center
+      a(href='//www.maximilianspeicher.tk')
+        img.logo(src='/images/speicher_coa.png')
+      a(href='//vsr.informatik.tu-chemnitz.de/')
+        img.logo(src='/images/TUC_logo_klein.png')
+      a(href='//www.unister.de/')
+        img.logo(src='/images/unister_logo_klein.png')
+      a(href='//www.esf-in-sachsen.de/')
+        img.logo(src='/images/ESF_LOGO_klein.png')
+      a(href='//www.esf-in-sachsen.de/')
+        img.logo(src='/images/eu_logo_klein.png')
+      | <br /><br />
+      small.transparent made with
+      br
+      a(href='//nodejs.org/')
+        img.logo(src='/images/nodejs_logo.png', style='margin: 0')
+    div#floating-logo.hidden
+      span.sio-logo
