@@ -1,18 +1,22 @@
 WaPPU: Was that Page Pleasant to Use?
 =====================================
 
+Copyright &copy; 2013&ndash;2014  Maximilian Speicher.
+The commercial use of this software or derivatives thereof is subject to certain restrictions (until January 1, 2020) and thus not generally permitted. If you would like to use the software or derivatives for commercial purposes, please contact the copyright holder.
+
+----------
+
 WaPPU is a tool for usability-based A/B testing that enables the prediction of usability scores from user interactions, e.g., **webpage A has a usability of 99 while webpage B has a usability of only 42.** The default configuration is to show a minimal questionnaire before a user leaves the first webpage. The usability score of the second webpage is then predicted based on user interactions alone. This is done by usability models that are trained from users' answers to the questionnaire on webpage one.
 
 If you make use of WaPPU, please include the following copyright statement:
-*The WaPPU Service -- https://github.com/maxspeicher/wappu-service/ -- DOI: http://dx.doi.org/10.5281/zenodo.11049
-Copyright (C) 2013-2014  Maximilian Speicher*
+*The WaPPU Service &mdash; https://github.com/maxspeicher/wappu-service/ &mdash; Copyright &copy; 2013-2014  Maximilian Speicher*
 
 If you want to cite WaPPU, please refer to the following research paper: [Ensuring Web Interface Quality through Usability-based Split Testing](http://link.springer.com/chapter/10.1007/978-3-319-08245-5_6)
 
 ## Set up your WaPPU Server!
 
 1. Set up a MySQL database called *wappu* and create tables using the scripts provided under [db-scripts](db-scripts).
-2. Clone my [statistics-utils](https://github.com/maxspeicher/statistics-utils) [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.13162.svg)](http://dx.doi.org/10.5281/zenodo.13162) repository.
+2. Clone my [statistics-utils](https://github.com/maxspeicher/statistics-utils) repository.
 3. Enter your database credentials in [statistics-utils/src/main/resources/application.properties](https://github.com/maxspeicher/statistics-utils/blob/master/src/main/resources/application.properties).
 4. Deploy the statistics-utils software using `mvn package tomcat:run -Dmaven.tomcat.port=8082`. It now runs under `http://localhost:8082/statistics-utils`.
 5. Clone this repository.
