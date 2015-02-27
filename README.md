@@ -2,7 +2,7 @@ WaPPU: Was that Page Pleasant to Use?
 =====================================
 
 Copyright &copy; 2013&ndash;2014  Maximilian Speicher.
-The commercial use of this software or derivatives thereof is subject to certain restrictions (until January 1, 2020) and thus not generally permitted. If you would like to use the software or derivatives for commercial purposes, please contact the copyright holder.
+The *commercial* use of this software or derivatives thereof is not permitted. If you would like to use the software or derivatives for commercial purposes, please contact the copyright holder.
 
 ----------
 
