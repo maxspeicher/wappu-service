@@ -13,7 +13,7 @@ DISCLAIMER: This is a research prototype that is working but still highly experi
 ## Getting Started
 
 1. Set up a MySQL database called *wappu* and create tables using the scripts provided under *wappu-service/wappu-db-scripts*.
-2. Clone my [statistics-utils](https://github.com/maxspeicher/statistics-utils "statistics-utils") repository.
+2. Clone my [statistics-utils](https://github.com/maxspeicher/statistics-utils/tree/alpha "statistics-utils") repository.
 3. Enter your database credentials in *statistics-utils/src/main/resources/application.properties*.
 4. Deploy the statistics-utils software using `mvn package tomcat:run -Dmaven.tomcat.port=8082`. It now runs under `http://localhost:8082`.
 5. Clone this repository.
