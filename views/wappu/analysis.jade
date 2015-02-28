@@ -1,0 +1,102 @@
+extends ../layout-wide
+
+block content
+  USABILITY_MIN = -7
+  USABILITY_MAX = +7
+  USABILITY_STEP = 100 / (USABILITY_MAX - USABILITY_MIN)
+  ITEM_MIN = -1
+  ITEM_MAX = +1
+  ITEM_STEP = 100 / (ITEM_MAX - ITEM_MIN)
+  div.block
+    table(border=0, cellpadding=10, cellspacing=0)
+      tr
+        td
+        - for (var v in data)
+          td(colspan=2)
+            h3.center Interface <q>#{v}</q>
+        td.center(rowspan=10)
+          div#traffic-light
+          div#significance.inline-block
+      tr
+        td.border-bottom
+        - for (var v in data)
+          td.center.border-bottom(colspan=2) Based on <strong>#{data[v].usabilityValues.length}</strong> users.
+      tr
+        td.border-right <strong>Overall Usability</strong>
+        - for (var v in data)
+          td.center
+            .important
+              | #{((data[v].expectedUsability - USABILITY_MIN) * USABILITY_STEP).toPrecision(3)}% &plusmn;
+              | #{(data[v].usabilityStdev * USABILITY_STEP).toPrecision(3)}%
+          - if (v == 'A')
+            td.border-right(id='usability#{v}')
+          - else
+            td(id='usability#{v}')
+      - for (var i in data.A.inuitItems)
+        tr
+          td.border-right #{i}
+          - for (var v in data)
+            td.center
+              - if (data[v].inuitItems[i])
+                | #{(data[v].inuitItems[i].expectedValue).toFixed(1)} &plusmn; #{(data[v].inuitItems[i].stdev).toFixed(1)}
+              - else
+                | N/A
+            - if (v == 'A')
+              td.border-right(id='#{i}#{v}')
+            - else
+              td(id='#{i}#{v}')
+  - var datarows = []
+  - for (var v in data)
+    - datarows.push(data[v].usabilityValues)
+    script
+      SIO.drawBar('usability#{v}', '#fff',
+        #{(data[v].expectedUsability - USABILITY_MIN) * USABILITY_STEP},
+        #{data[v].usabilityStdev * USABILITY_STEP});
+    - for (var i in data[v].inuitItems)
+      script
+        SIO.drawBar('#{i}#{v}', '#fff',
+          #{(data[v].inuitItems[i].expectedValue - ITEM_MIN) * ITEM_STEP},
+          #{data[v].inuitItems[i].stdev * ITEM_STEP});
+  script
+    $.ajax('//localhost:8082/ml-utils/test/mann-whitney-u', {
+      crossDomain: true,
+      data: {
+        x: '#{data.A.usabilityValues}',
+        y: '#{data.B.usabilityValues}'
+      },
+      dataType: 'jsonp',
+      success: function(p) {
+        var significant = false;
+        var better = false;
+    
+        if (p > 0.05 || #{data.B.expectedUsability} == #{data.A.expectedUsability}) {
+          significant = false;
+        } else {
+          significant = true;
+        }
+        
+        if (#{data.B.expectedUsability} < #{data.A.expectedUsability}) {
+          better = false;
+        } else {
+          better = true;
+        }
+
+        if (!significant) {
+          SIO.drawTrafficLight('traffic-light', '#fff', 'yellow');
+        } else {
+          if (!better) {
+            SIO.drawTrafficLight('traffic-light', '#fff', 'red');
+          } else {
+            SIO.drawTrafficLight('traffic-light', '#fff', 'green');
+          }
+        }
+    
+        $('#significance').html(
+          'Interface <strong><q>B</q></strong> is <em>' +
+          (significant ? '' : 'not ') +
+          'significantly ' +
+          (better ? 'better' : 'worse') +
+          '</em> than interface <strong><q>A</q></strong>.'
+        );
+      }
+    });

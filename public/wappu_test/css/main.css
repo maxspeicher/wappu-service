@@ -1,0 +1,59 @@
+h1 {
+    font-size: 300%;
+    text-align: center;
+}
+
+#content {
+    float: left;
+    width: 67%;
+}
+
+#header {
+    height: 200px;
+    text-align: center;
+    width: 100%;
+}
+
+#instructions {
+    font-family: Verdana, Arial, sans-serif;
+    padding: 20px;
+}
+
+#searchForm {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#serpResults {
+    background-color: #ccc;
+    height: 600px;
+    margin: 20px auto;
+    width: 300px;
+}
+
+#sidebar {
+    float: left;
+    width: 33%;
+}
+
+.center {
+    text-align: center;
+}
+
+.div-helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.f {
+    float: left;
+}
+
+.left {
+    text-align: left;
+}
+
+.right {
+    text-align: right;
+}

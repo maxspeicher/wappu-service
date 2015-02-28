@@ -1,0 +1,64 @@
+extends ../layout
+
+block content
+  div.block
+    h3 Welcome to the WaPPU A/B Testing Service
+    div.p
+      | The <em>WaPPU A/B Testing Service</em> enables you to compare two different versions of your web interface
+      | based on a quantitative measure of usability.
+    div.p
+      | The only thing you have to do is to include two tiny JavaScript snippets into the two versions of your
+      | interface. These snippets can be customized and generated below. You will then be provided a link to the
+      | <em>real-time</em> analysis of your A/B testing project.
+  div.block
+    h3 Create new A/B testing project
+    div.p
+      form(action='/wappu/saveProject', method='POST')
+        input(type='hidden', name='projectId')
+        table(border=0, cellpadding=5, cellspacing=0)
+          tr
+            td
+            td Project Name<br />
+              input(type='text', name='name', maxlength=100)
+          tr
+            td
+            td Password<br />
+              input(type='password', name='pw', maxlength=100)
+          tr
+            td
+              input#check-predefined(name='choose-config', type='radio', checked)
+            td Choose a predefined configuration
+              div#config-predefined
+                select#config-predefined-select
+                  option(value='') - Choose -
+                  option(value='serp') Search Engine Results Page
+          tr
+            td
+              input#check-custom(name='choose-config', type='radio')
+            td Create a custom configuration
+              div#config-custom
+                div#custom-rule-template
+                  input.fl.custom-component(type='text')
+                  input(type='text')
+                  a.btn.add-custom-rule
+                    i.icon-large.icon-plus-sign
+                  br.c
+                div.custom-rule
+                  input.fl.custom-component(type='text')
+                  input.custom-features(type='text')
+                  a.btn.add-custom-rule
+                    i.icon-large.icon-plus-sign
+                  br.c
+          tr
+            td
+            td
+              input(type='submit', value='Save Project')
+    div.p
+      | Snippet for <strong>Interface A</strong>:
+      textarea#snippet-a(readonly=true)
+    div.p
+      | Snippet for <strong>Interface B</strong>:
+      textarea#snippet-b(readonly=true)
+  script(src='/javascripts/wappu-service.js')
+  script(src='/javascripts/jquery.tokeninput.js')
+  link(rel='stylesheet', type='text/css', href='/stylesheets/token-input-facebook.css')
