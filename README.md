@@ -120,7 +120,7 @@ The more features you track the more imprecise WaPPU's predictions will be at fi
 
 ## Publications
 
-* Maximilian Speicher, Andreas Both, and Martin Gaedke (2014). "Ensuring Web Interface Quality through Usability-based Split Testing". In: *Proc. ICWE*.
-* Maximilian Speicher, Andreas Both, and Martin Gaedke (2014). "WaPPU: Usability-based A/B Testing". In: *Proc. ICWE (Demos)*.
+* Maximilian Speicher, Andreas Both, and Martin Gaedke (2014). "Ensuring Web Interface Quality through Usability-based Split Testing". In: *Proc. ICWE*. http://link.springer.com/chapter/10.1007%2F978-3-319-08245-5_6
+* Maximilian Speicher, Andreas Both, and Martin Gaedke (2014). "WaPPU: Usability-based A/B Testing". In: *Proc. ICWE (Demos)*. http://link.springer.com/chapter/10.1007%2F978-3-319-08245-5_47
 
 Also, a [poster](http://twentyoheight.wordpress.com/2014/07/07/how-to-infer-usability-from-user-interactions-my-poster-presented-at-icwe2014/) about WaPPU has been presented at the 2014 *International Conference on Web Engineering*.
