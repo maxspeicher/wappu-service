@@ -11,7 +11,7 @@ WaPPU is a tool for usability-based A/B testing that enables the prediction of u
 If you make use of WaPPU, please include the following copyright statement:
 *The WaPPU Service &mdash; https://github.com/maxspeicher/wappu-service/ &mdash; Copyright &copy; 2013-2014  Maximilian Speicher*
 
-If you want to cite WaPPU, please refer to the following research paper: [Ensuring Web Interface Quality through Usability-based Split Testing](http://link.springer.com/chapter/10.1007/978-3-319-08245-5_6)
+If you want to cite WaPPU, please refer to the following research paper: [Ensuring Web Interface Quality through Usability-based Split Testing](http://link.springer.com/chapter/10.1007/978-3-319-08245-5_6) ([Full Text](https://www.researchgate.net/publication/271269916))
 
 ## Set up your WaPPU Server!
 
@@ -120,7 +120,7 @@ The more features you track the more imprecise WaPPU's predictions will be at fi
 
 ## Publications
 
-* Maximilian Speicher, Andreas Both, and Martin Gaedke (2014). "Ensuring Web Interface Quality through Usability-based Split Testing". In: *Proc. ICWE*. http://link.springer.com/chapter/10.1007%2F978-3-319-08245-5_6
-* Maximilian Speicher, Andreas Both, and Martin Gaedke (2014). "WaPPU: Usability-based A/B Testing". In: *Proc. ICWE (Demos)*. http://link.springer.com/chapter/10.1007%2F978-3-319-08245-5_47
+* Maximilian Speicher, Andreas Both, and Martin Gaedke (2014). "Ensuring Web Interface Quality through Usability-based Split Testing". In: *Proc. ICWE*. [Electronic Edition](http://link.springer.com/chapter/10.1007%2F978-3-319-08245-5_6) | [Full Text](https://www.researchgate.net/publication/271269916)
+* Maximilian Speicher, Andreas Both, and Martin Gaedke (2014). "WaPPU: Usability-based A/B Testing". In: *Proc. ICWE (Demos)*. [Electronic Edition](http://link.springer.com/chapter/10.1007%2F978-3-319-08245-5_47) | [Full Text](https://www.researchgate.net/publication/271269917)
 
 Also, a [poster](http://twentyoheight.wordpress.com/2014/07/07/how-to-infer-usability-from-user-interactions-my-poster-presented-at-icwe2014/) about WaPPU has been presented at the 2014 *International Conference on Web Engineering*.
